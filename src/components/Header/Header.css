@@ -1,0 +1,34 @@
+.header img{
+    width: 300px;
+
+}
+/* .nav {
+    background-color: black;
+    line-height: 50px; 
+    text-align: center;
+ } */
+.navLink{
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 20px;
+    color: white;
+    padding: 10px;
+}
+.navLink:hover{
+    background-color:gainsboro;
+    border-radius: 10px;
+}
+.header{
+    
+    text-align: center;
+    
+}
+
+.header-content{
+    background-color: black;
+    line-height: 50px; 
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
