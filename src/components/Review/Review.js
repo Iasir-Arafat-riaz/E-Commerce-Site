@@ -18,13 +18,25 @@ const Review = () => {
     setCart(removeItem);
     deleteFromDb(key);
   };
+
+//regular way
   const history = useHistory()
+//   const historyEvent =()=>{
+//     history.push("/placeOrder")
+//     clearTheCart()
+//     setCart([])
+// }
+
+
+//buttond hndler event continue with shipping component
+
   const historyEvent =()=>{
-    history.push("/placeOrder")
-    clearTheCart()
-    // localStorage.removeItem("shopping_cart")
-    
-  }
+    history.push("/shipping")
+   
+}
+
+
+
   return (
     <div className="shop-container">
       <div className="products">
@@ -39,7 +51,8 @@ const Review = () => {
       <div className="cart">
         <Cart carts={cart}>
           {/* button handler for use history  */}
-        <button onClick={historyEvent} className="regular-btn">Place order</button>
+        {/* <button onClick={historyEvent} className="regular-btn">Place order</button> */}
+        <button onClick={historyEvent} className="regular-btn">Procced to Shipping</button>
         </Cart>
       </div>
     </div>

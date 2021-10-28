@@ -1,0 +1,9 @@
+.shipping-div input{
+display: block;
+
+}
+.shipping-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

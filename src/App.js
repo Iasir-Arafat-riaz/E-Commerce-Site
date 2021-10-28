@@ -8,10 +8,18 @@ import Review from "./components/Review/Review";
 import Inventory from "./components/Inventory/Inventory";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PlaceOrder from "./components/PlaceOrder/PlaceOrder";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import AuthProvider from "./components/AuthProvider/AuthProvider";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Shipping from "./components/Shipping/Shipping";
+
+
 
 function App() {
   return (
     <div>
+      <AuthProvider>
       <Router>
         <Header />
         <Switch>
@@ -27,14 +35,27 @@ function App() {
           <Route path="/inventory">
             <Inventory></Inventory>
           </Route>
-          <Route path="/placeOrder">
+          <PrivateRoute path="/placeOrder">
             <PlaceOrder></PlaceOrder>
+          </PrivateRoute>
+          <Route path="/login">
+            <Login></Login>
           </Route>
+
+          <Route path="/register">
+            <Register></Register>
+          </Route>
+          <Route path="/shipping">
+            <Shipping></Shipping>
+          </Route>
+
           <Route path="*">
             <Error></Error>
           </Route>
         </Switch>
       </Router>
+      </AuthProvider>
+      
     </div>
   );
 }
