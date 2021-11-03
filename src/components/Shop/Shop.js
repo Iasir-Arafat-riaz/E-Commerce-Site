@@ -8,6 +8,7 @@ import "./Shop.css";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [displayProduct, setDisplayProduct] = useState([]);
+  const [pageCount,setPageCount]=useState(0)
 
   useEffect(() => {
     fetch("http://localhost:5000/shop")
@@ -15,9 +16,12 @@ const Shop = () => {
       .then((data) => {
         setProducts(data.all);
         setDisplayProduct(data.all);
+        const count = data.count
+        const pageNumber = Math.ceil(count/10)
+        setPageCount(pageNumber)
       });
   }, []);
-
+console.log(pageCount)
   useEffect(() => {
     if (products.length) {
       const getData = getStoredCart();
