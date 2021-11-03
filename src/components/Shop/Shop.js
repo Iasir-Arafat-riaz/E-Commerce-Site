@@ -10,11 +10,11 @@ const Shop = () => {
   const [displayProduct, setDisplayProduct] = useState([]);
 
   useEffect(() => {
-    fetch("./products.JSON")
+    fetch("http://localhost:5000/shop")
       .then((respo) => respo.json())
       .then((data) => {
-        setProducts(data);
-        setDisplayProduct(data);
+        setProducts(data.all);
+        setDisplayProduct(data.all);
       });
   }, []);
 
