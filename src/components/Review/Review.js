@@ -10,7 +10,7 @@ import OrderItem from "../OrderItem/OrderItem";
 
 const Review = () => {
   const [product] = useProduct();
-  const [cart, setCart] = useCart(product);
+  const [cart, setCart] = useCart();
   console.log(cart);
   console.log(product);
   const addEventHndle = (key) => {

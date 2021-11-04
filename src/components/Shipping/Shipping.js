@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import useAuth from "../../hoock/useAuth";
+import clearTheCart, { getStoredCart } from "../../utilities/fakedb";
 import "./Shipping.css"
 
 const Shipping = () => {
@@ -9,16 +10,38 @@ const Shipping = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-
-  const history = useHistory();
-  const placeOrder = () => {
-    history.push("/placeOrder");
+  const onSubmit = (data) =>{
+    const savedCart = getStoredCart()
+    console.log(savedCart)
+    
+    data.order = savedCart
+    console.log(data)
+    fetch("http://localhost:5000/order",{
+      method:"post",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify(data)
+    })
+    .then(res=>res.json())
+    .then(data=>{
+     if(data.insertedId){
+       alert("your order is confirm")
+       reset()
+       clearTheCart()
+     }
+    })
+   
+    
   };
 
+  const history = useHistory();
+  // const placeOrder = () => {
+  //   history.push("/placeOrder");
+  // };
+
   const {user}= useAuth()
-  console.log(user)
+  // console.log(user)
 
   return (
     <div className="shipping-div">
@@ -29,14 +52,27 @@ const Shipping = () => {
        <input
        defaultValue={user.displayName}
         placeholder="name"
-          id="name"
-          {...register("name", { required: true, maxLength: 30 })}
+        
+          {...register("name", { required: true})}
         />
        <input
         defaultValue={user.email}
         placeholder="email"
-          id="name"
-          {...register("email", { required: true, maxLength: 30 })}
+        
+          {...register("email", { required: true, })}
+        />
+       <input
+        
+        placeholder="phone number"
+          
+          type="number"
+          {...register("phone", { required: true,})}
+        />
+       <input
+        
+        placeholder="enter your address"
+         
+          {...register("address", { required: true })}
         />
         {/* {errors.name && errors.name.type === "required" && (
           <span>This is required</span>
@@ -44,7 +80,7 @@ const Shipping = () => {
         {/* {errors.name && errors.name.type === "maxLength" && (
           <span>Max length exceeded</span>
         )} */}
-        <input className="regular-btn" onClick={placeOrder} type="submit" />
+        <input className="regular-btn"  type="submit" />
       </form>
       </div>
     </div>

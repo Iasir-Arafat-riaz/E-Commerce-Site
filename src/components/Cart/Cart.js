@@ -9,7 +9,7 @@ const Cart = (props) => {
   
 
   const all = carts.reduce((previous, current) => previous + current.price, 0);
-  console.log(carts);
+  // console.log(carts);
   
   let totalQuantity= 0;
   let price = 0;
@@ -45,7 +45,7 @@ const Cart = (props) => {
     <div>
       <h3 className="center">Order Summary</h3>
       <p className="center">Items Order {totalQuantity}</p>
-      <h4>reduce: {all.toFixed(2)} </h4>
+      {/* <h4>reduce: {all.toFixed(2)} </h4> */}
       <p>items price : ${price.toFixed(2)} </p>
       <p>Shipping : ${shippingCost}</p>
       <p>Total before tax: ${totalWithoutTx.toFixed(2)}</p>

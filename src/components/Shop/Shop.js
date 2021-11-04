@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useCart from "../../hoock/useCart";
 import { addToDb, getStoredCart } from "../../utilities/fakedb";
 import Cart from "../Cart/Cart";
 import Product from "../Product/Product";
@@ -8,44 +9,47 @@ import "./Shop.css";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [displayProduct, setDisplayProduct] = useState([]);
-  const [pageCount,setPageCount]=useState(0)
-
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+  const [cart, setCart] = useCart();
+ const size = 10
   useEffect(() => {
-    fetch("http://localhost:5000/shop")
+    fetch(`http://localhost:5000/shop?page=${page}&&size=${size}`)
       .then((respo) => respo.json())
       .then((data) => {
-        setProducts(data.all);
-        setDisplayProduct(data.all);
-        const count = data.count
-        const pageNumber = Math.ceil(count/10)
-        setPageCount(pageNumber)
+        setProducts(data.products);
+        setDisplayProduct(data.products);
+        const count = data.count;
+        const pageNumber = Math.ceil(count / 10);
+        setPageCount(pageNumber);
       });
-  }, []);
-console.log(pageCount)
-  useEffect(() => {
-    if (products.length) {
-      const getData = getStoredCart();
-      const myCart = [];
+  }, [page]);
+  console.log(pageCount);
+  // useEffect(() => {
+  //   if (products.length) {
+  //     const getData = getStoredCart();
+  //     const myCart = [];
 
-      for (const singleKey in getData) {
-        console.log(singleKey, getData[singleKey]);
-        const addedProduct = products.find(
-          (product) => product.key === singleKey
-        );
-        if (addedProduct) {
-          const quantity = getData[singleKey];
-          addedProduct.quantity = quantity;
-          // console.log(addedProduct)
-          myCart.push(addedProduct);
-        }
-      }
-      setCart(myCart);
-      console.log(myCart);
-    }
-    //set useEffect dependency for skiping undefined
-  }, [products]);
+  //     for (const singleKey in getData) {
+  //       console.log(singleKey, getData[singleKey]);
+  //       const addedProduct = products.find(
+  //         (product) => product.key === singleKey
+  //       );
+  //       if (addedProduct) {
+  //         const quantity = getData[singleKey];
+  //         addedProduct.quantity = quantity;
+  //         // console.log(addedProduct)
+  //         myCart.push(addedProduct);
+  //       }
+  //     }
+  //     setCart(myCart);
+  //     console.log(myCart);
+  //   }
+  //   //set useEffect dependency for skiping undefined
+  // }, [products]);
 
-  const [cart, setCart] = useState([]);
+  // const [cart, setCart] = useState([]);
+ 
   const handleBtn = (product) => {
     // const newCart = [...cart, product];
     // setCart(newCart);
@@ -91,6 +95,11 @@ console.log(pageCount)
           {displayProduct.map((product) => (
             <Product product={product} btn={handleBtn} key={product.key} />
           ))}
+          <div className="pagination">
+            {[...Array(pageCount).keys()].map((number) => (
+              <button onClick={()=>setPage(number)} key={number} className={page===number?"selected":""}>{number+1}</button>
+            ))}
+          </div>
         </div>
         <div className="cart">
           <Cart carts={cart}>
