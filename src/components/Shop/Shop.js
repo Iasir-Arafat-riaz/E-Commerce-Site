@@ -14,7 +14,7 @@ const Shop = () => {
   const [cart, setCart] = useCart();
  const size = 10
   useEffect(() => {
-    fetch(`http://localhost:5000/shop?page=${page}&&size=${size}`)
+    fetch(`https://intense-sea-55372.herokuapp.com/shop?page=${page}&&size=${size}`)
       .then((respo) => respo.json())
       .then((data) => {
         setProducts(data.products);

@@ -13,6 +13,7 @@ import Register from "./components/Register/Register";
 import AuthProvider from "./components/AuthProvider/AuthProvider";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Shipping from "./components/Shipping/Shipping";
+import Orders from "./components/Orders/Orders";
 
 
 
@@ -47,6 +48,9 @@ function App() {
           </Route>
           <Route path="/shipping">
             <Shipping></Shipping>
+          </Route>
+          <Route exact path="/order">
+            <Orders></Orders>
           </Route>
 
           <Route path="*">

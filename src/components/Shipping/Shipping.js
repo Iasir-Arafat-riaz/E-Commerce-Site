@@ -17,8 +17,9 @@ const Shipping = () => {
     console.log(savedCart)
     
     data.order = savedCart
+    data.time=new Date()
     console.log(data)
-    fetch("http://localhost:5000/order",{
+    fetch("https://intense-sea-55372.herokuapp.com/order",{
       method:"post",
       headers:{"content-type":"application/json"},
       body:JSON.stringify(data)

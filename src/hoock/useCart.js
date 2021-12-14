@@ -9,10 +9,10 @@ const useCart = () => {
 
     const keys = Object.keys(savedCart);
     console.log(keys);
-    // axios.post("http://localhost:5000/shop/keys", keys).then((products) => {
+    // axios.post("https://intense-sea-55372.herokuapp.com/shop/keys", keys).then((products) => {
     //   console.log(products);
     // });
-    fetch("http://localhost:5000/shop/keys",{
+    fetch("https://intense-sea-55372.herokuapp.com/shop/keys",{
       method:"post",
       headers:{"content-type":"application/json"},
       body:JSON.stringify(keys)

@@ -19,7 +19,7 @@
     border-radius: 10px;
 }
 .header{
-    
+    background-color: rgb(204, 203, 170);
     text-align: center;
     
 }
@@ -42,4 +42,14 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
+}
+.virtual{
+    font-size: 3em;
+    font-weight: 700;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: rgb(175, 102, 7);
+
+}
+.virtual:hover{
+    color: black;
 }

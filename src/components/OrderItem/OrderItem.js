@@ -6,8 +6,8 @@ const OrderItem = (props) => {
   const { name, img, price, quantity,key } = props.product;
   const{addEventHndle}=props
   return (
-    <div className="order-item">
-      this is order item
+    <div className="order-item m-2">
+
       <div className="product">
         <div>
           <img src={img} alt="" />

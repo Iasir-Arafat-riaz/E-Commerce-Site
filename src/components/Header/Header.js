@@ -9,8 +9,8 @@ const Header = () => {
   const { user, userSignout } = useAuth();
   return (
     <div className="header">
-      <img src={logo} alt="" />
-     
+      {/* <img src={logo} alt="" /> */}
+     <h1 className="virtual">Virtual-Shop</h1>
         <div className="header-content">
           <nav className="nav">
             <NavLink
@@ -41,8 +41,18 @@ const Header = () => {
               className="navLink"
               to="/inventory"
             >
-              Inventory
+              Contact
             </NavLink>
+            {user.email&& <NavLink
+              activeStyle={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+              className="navLink"
+              to="/order"
+            >
+              Order
+            </NavLink>}
             
 
              {user.email && <small>{user.displayName}</small>}
